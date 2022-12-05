@@ -32,4 +32,11 @@ router.post('/',
     })
 );
 
+// route used for logging out - will be DELETE request to /api/session (already handled by routers above this one, so just / in relation this router)
+router.delete('/', (_req, res) => {
+    // when a user logs out we want to remove the session token cookie and then send a success response
+    res.clearCookie('token');
+    return res.json({message: 'success'});
+})
+
 module.exports = router;
