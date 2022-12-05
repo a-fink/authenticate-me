@@ -3,6 +3,8 @@ const router = express.Router();
 const asyncHandler = require('express-async-handler');
 const { setTokenCookie, restroreUser, restoreUser } = require('../../utils/auth');
 const { User } = require('../../db/models');
+const { check } = require('express-validator');
+const { handleValidationErrors } = require('../../utils/validation');
 
 // router for all routes beginning with /api/session (already handled by routers above this one, so just / in relation this router)
 
@@ -21,8 +23,19 @@ router.get('/', restoreUser, (req, res) => {
     }
 });
 
+// middleware to validate information coming in on the request body for logging in
+// using built in check function from express-validator, and the error handler for validation errors we built
+// check for given conditions, and respond with given error message if fails, then send results to the handleValidationErrors middleware
+const validateLogin = [
+    check('credential').exists({checkFalsy: true}).notEmpty().withMessage('Please provide a valid email or username.'),
+    check('password').exists({checkFalsy: true}).withMessage('Please provide a password.'),
+    handleValidationErrors
+];
+
 // route used for logging in - will be POST request
+// adding validateLogin middleware as a parameter here to connect the middleware
 router.post('/',
+    validateLogin,
     asyncHandler(async (req, res, next) => {
         // destructure the credential & password from the request body
         const { credential, password } = req.body;
