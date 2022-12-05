@@ -3,6 +3,21 @@ const router = require('express').Router();
 const asyncHandler = require('express-async-handler');
 const { setTokenCookie, restoreUser, requireAuth } = require('../../utils/auth');
 const { User } = require('../../db/models');
+const sessionRouter = require('./session');
+const usersRouter = require('./users');
+
+// connect the session router
+router.use('/session', sessionRouter);
+
+// connect the users router
+router.use('/users', usersRouter);
+
+// test route for this router
+router.post('/test', function(req, res) {
+    res.json({requestBody: req.body});
+});
+
+module.exports = router;
 
 /*
 TEST ROUTES - ALL WORKING NOW - KEEPING TESTS IN CASE NEEDED IN FUTURE
@@ -26,11 +41,4 @@ router.get('/restore-user', restoreUser, (req, res) => {
 router.get('/require-auth', requireAuth, (req, res) => {
     return res.json(req.user);
 });
-
-// test router for this router
-router.post('/test', function(req, res) {
-    res.json({requestBody: req.body});
-});
 */
-
-module.exports = router;
