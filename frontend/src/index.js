@@ -5,10 +5,16 @@ import App from './App';
 import { store } from './app/store';
 import { Provider } from 'react-redux';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { restoreCSRF, csrfFetch } from './app/csrf';
 
-// in development only, expose the store on window -> used for testing redux store setup is correctly connected
+// in DEVELOPMENT only -> used for testing everything is correctly connected
 if(process.env.NODE_ENV !== 'production'){
+  // run the restoreCSRF function to get the cookies set properly
+  restoreCSRF();
+
+  // expose the redux store & the csrfFetch method on the window
   window.store = store;
+  window.csrfFetch = csrfFetch;
 }
 
 const root = ReactDOM.createRoot(document.getElementById('root'));

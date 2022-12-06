@@ -12,15 +12,15 @@ router.use('/session', sessionRouter);
 // connect the users router
 router.use('/users', usersRouter);
 
+module.exports = router;
+
+/*
+TEST ROUTES - ALL WORKING NOW - KEEPING TESTS IN CASE NEEDED IN FUTURE
 // test route for this router
 router.post('/test', function(req, res) {
     res.json({requestBody: req.body});
 });
 
-module.exports = router;
-
-/*
-TEST ROUTES - ALL WORKING NOW - KEEPING TESTS IN CASE NEEDED IN FUTURE
 // route to test the setTokenCookie function
 router.get('/set-token-cookie', asyncHandler(async (_req, res) => {
     const user = await User.findOne({
