@@ -40,7 +40,7 @@ router.post('/',
         // destructure the credential & password from the request body
         const { credential, password } = req.body;
 
-        // attempt to find hte user with those credentials
+        // attempt to find the user with those credentials
         const user = await User.login({credential, password});
 
         // if there's no matching user create an error and send it to the next error handling middleware
