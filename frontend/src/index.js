@@ -6,7 +6,7 @@ import { store } from './app/store';
 import { Provider } from 'react-redux';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { restoreCSRF, csrfFetch } from './app/csrf';
-import * as sessionActions from './app/sessionSlice';
+import { logInUser, logOutUser } from './app/sessionSlice';
 
 // in DEVELOPMENT only -> used for testing everything is correctly connected
 if(process.env.NODE_ENV !== 'production'){
@@ -16,7 +16,8 @@ if(process.env.NODE_ENV !== 'production'){
   // expose the redux store & the csrfFetch & sessionActions method on the window
   window.store = store;
   window.csrfFetch = csrfFetch;
-  window.sessionActions = sessionActions;
+  window.logInUser = logInUser;
+  window.logOutUser = logOutUser;
 }
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
