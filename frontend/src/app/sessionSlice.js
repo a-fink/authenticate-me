@@ -45,6 +45,9 @@ export const sessionSlice = createSlice({
     extraReducers(builder){
         builder.addCase(logInUser.fulfilled, (state, action) => {
             // will have the logged in user in the action.payload, set that user on state
+            console.log(`extra reducer case hit`);
+            console.log(state);
+            console.log(action)
             state.user = action.payload;
         });
     }
