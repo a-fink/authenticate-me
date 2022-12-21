@@ -1,1 +1,8 @@
+/* connect bootstrap styling*/
+@import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
+
 /* TODO Add site wide styles */
+body{
+    display: grid;
+    min-height: 100vh;
+}

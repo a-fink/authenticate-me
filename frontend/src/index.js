@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
+import LoginFormPage from './components/LoginFormPage';
 import { store } from './app/store';
 import { Provider } from 'react-redux';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
@@ -20,6 +21,8 @@ if(process.env.NODE_ENV !== 'production'){
   window.logOutUser = logOutUser;
 }
 
+
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
@@ -27,6 +30,7 @@ root.render(
       <BrowserRouter>
         <Routes>
           <Route path="/*" element={<App />} />
+          <Route path='/login' element={<LoginFormPage />} />
         </Routes>
       </BrowserRouter>
     </Provider>

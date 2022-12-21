@@ -27,6 +27,9 @@ export const logInUser = createAsyncThunk('session/login', async userData => {
     options.method = 'POST';
     options.body = JSON.stringify(userData);
 
+    console.log('in logInUser thunk');
+    console.log(options);
+
     // send the post request, parse the json response received, and return it (will be user object for user that was logged in)
     const response = await csrfFetch('/api/session', options);
     const user = await response.json();
