@@ -1,12 +1,16 @@
 import { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { logInUser } from '../../app/sessionSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import { logInUser, selectUser } from '../../app/sessionSlice';
+import { Navigate } from 'react-router-dom';
 import Container from 'react-bootstrap/Container';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import './login-form-page.css';
 
 function LoginFormPage(){
+    // get the value of user currently stored in our redux store
+    const user = useSelector(selectUser);
+
     // states specific to this component, user entered data, both start as empty string
     const [credential, setCredential] = useState('');
     const [password, setPassword] = useState('');
@@ -69,34 +73,44 @@ function LoginFormPage(){
         setPassword(event.target.value);
     }
 
-    return (
-        <Container id='login-container' className='d-grid h-100'>
-            <Form className='w-50' onSubmit={formSubmitHandler}>
-                <h1 className='text-center mb-5'>Please sign in</h1>
-                <Form.Group controlId='formCredential' className='mb-3 fs-5'>
-                    <Form.Label className='label'>Email or Username</Form.Label>
-                    <Form.Control
-                        type='text'
-                        value={credential}
-                        name='credential'
-                        placeholder='Email or Username'
-                        onChange={credentialChangeHandler}
-                    />
-                </Form.Group>
-                <Form.Group controlId='formPassword' className='fs-5'>
-                    <Form.Label className='label'>Password</Form.Label>
-                    <Form.Control
-                        type='password'
-                        value={password}
-                        name='password'
-                        placeholder='Password'
-                        onChange={passwordChangeHandler}
-                    />
-                </Form.Group>
-                <Button className='w-100 mt-5' variant='primary' type='submit'>Submit</Button>
-            </Form>
-        </Container>
-    );
+    // if a user already exists redirect them to the home page
+    if(user !== null){
+        console.log('hit the redirect case');
+        return (
+            <Navigate to='/' />
+        );
+    }
+    // otherwise render the login component
+    else{
+        return (
+            <Container id='login-container' className='d-grid h-100'>
+                <Form className='w-50' onSubmit={formSubmitHandler}>
+                    <h1 className='text-center mb-5'>Please sign in</h1>
+                    <Form.Group controlId='formCredential' className='mb-3 fs-5'>
+                        <Form.Label className='label'>Email or Username</Form.Label>
+                        <Form.Control
+                            type='text'
+                            value={credential}
+                            name='credential'
+                            placeholder='Email or Username'
+                            onChange={credentialChangeHandler}
+                        />
+                    </Form.Group>
+                    <Form.Group controlId='formPassword' className='fs-5'>
+                        <Form.Label className='label'>Password</Form.Label>
+                        <Form.Control
+                            type='password'
+                            value={password}
+                            name='password'
+                            placeholder='Password'
+                            onChange={passwordChangeHandler}
+                        />
+                    </Form.Group>
+                    <Button className='w-100 mt-5' variant='primary' type='submit'>Submit</Button>
+                </Form>
+            </Container>
+        );
+    }
 }
 
 export default LoginFormPage;
