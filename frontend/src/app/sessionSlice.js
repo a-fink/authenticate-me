@@ -45,6 +45,26 @@ export const restoreUser = createAsyncThunk('session/restore', async () => {
     return data.user;
 })
 
+// async thunk for creating a new user
+// will be used from the signup page, error handling and loading status will be handled there
+export const addNewUser = createAsyncThunk('session/addUser', async userData => {
+    // userData will be an object that is the body we need to send to create the user, will have a username, email, and password
+    // need to use csrfFetch we built to make post request with right csrf token - need to give it a url and an options object
+    // it will set the headers for us, so we can just give options a method of POST and the json of the user data for body
+    let options = {};
+    options.method = 'POST';
+    options.body = JSON.stringify(userData);
+
+    console.log('in the addNewUser thunk');
+    console.log(options);
+
+    // send the post request, parse the json response received, and return it (will be an object with a user property that contains the user object for user that was created)
+    const response = await csrfFetch('/api/users', options);
+    const data = await response.json();
+    console.log(data)
+    return data.user;
+})
+
 
 // create the slice with the initial state & then build reducers
 export const sessionSlice = createSlice({
@@ -59,7 +79,7 @@ export const sessionSlice = createSlice({
             // will have the logged in user in the action.payload, set that user on state
             console.log(`login user extra reducer case hit`);
             console.log(state);
-            console.log(action)
+            console.log(action);
             state.user = action.payload;
         })
         .addCase(restoreUser.fulfilled, (state, action) => {
@@ -69,6 +89,13 @@ export const sessionSlice = createSlice({
             console.log(state);
             console.log(action);
             if(action.payload !== undefined) state.user = action.payload;
+        })
+        .addCase(addNewUser.fulfilled, (state, action) => {
+            // will have the newly created & logged in user in the action.payload, set that user on state
+            console.log('add new user extra reducer case hit');
+            console.log(state);
+            console.log(action);
+            state.user = action.payload;
         });
     }
 })
