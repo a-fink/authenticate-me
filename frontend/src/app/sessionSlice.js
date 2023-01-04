@@ -36,6 +36,15 @@ export const logInUser = createAsyncThunk('session/login', async userData => {
     return user;
 })
 
+// async thunk for restoring a user that's already logged in
+// will be used from the main application component, error handling and loading status will be handled there
+export const restoreUser = createAsyncThunk('session/restore', async () => {
+    // send a get request, parse the json response received, and return it (will be user object for user that was logged in, or undefined if none logged in)
+    const response = await csrfFetch('/api/session');
+    const data = await response.json();
+    return data.user;
+})
+
 
 // create the slice with the initial state & then build reducers
 export const sessionSlice = createSlice({
@@ -44,14 +53,22 @@ export const sessionSlice = createSlice({
     reducers: {
         logOutUser: state => {state.user = null}
     },
-    // error handling / loading will be handled by the login component, so only listening for success action from async thunk here
+    // error handling / loading will be handled by the login & app components, so only listening for success action from async thunks here
     extraReducers(builder){
         builder.addCase(logInUser.fulfilled, (state, action) => {
             // will have the logged in user in the action.payload, set that user on state
-            console.log(`extra reducer case hit`);
+            console.log(`login user extra reducer case hit`);
             console.log(state);
             console.log(action)
             state.user = action.payload;
+        })
+        .addCase(restoreUser.fulfilled, (state, action) => {
+            // if user token existed, action payload will have the user data, otherwise it will have undefined
+            // provided user data is there, set the user state to hold the user data
+            console.log('restore user extra reducer case hit');
+            console.log(state);
+            console.log(action);
+            if(action.payload !== undefined) state.user = action.payload;
         });
     }
 })

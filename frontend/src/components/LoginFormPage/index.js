@@ -73,44 +73,35 @@ function LoginFormPage(){
         setPassword(event.target.value);
     }
 
-    // if a user already exists redirect them to the home page
-    if(user !== null){
-        console.log('hit the redirect case');
-        return (
-            <Navigate to='/' />
-        );
-    }
-    // otherwise render the login component
-    else{
-        return (
-            <Container id='login-container' className='d-grid h-100'>
-                <Form className='w-50' onSubmit={formSubmitHandler}>
-                    <h1 className='text-center mb-5'>Please sign in</h1>
-                    <Form.Group controlId='formCredential' className='mb-3 fs-5'>
-                        <Form.Label className='label'>Email or Username</Form.Label>
-                        <Form.Control
-                            type='text'
-                            value={credential}
-                            name='credential'
-                            placeholder='Email or Username'
-                            onChange={credentialChangeHandler}
-                        />
-                    </Form.Group>
-                    <Form.Group controlId='formPassword' className='fs-5'>
-                        <Form.Label className='label'>Password</Form.Label>
-                        <Form.Control
-                            type='password'
-                            value={password}
-                            name='password'
-                            placeholder='Password'
-                            onChange={passwordChangeHandler}
-                        />
-                    </Form.Group>
-                    <Button className='w-100 mt-5' variant='primary' type='submit'>Submit</Button>
-                </Form>
-            </Container>
-        );
-    }
+    // if a user already exists redirect them to the home page otherwise render the login component
+    return (user !== null) ? <Navigate to='/' /> : (
+        <Container id='login-container' className='d-grid h-100'>
+            <Form className='w-50' onSubmit={formSubmitHandler}>
+                <h1 className='text-center mb-5'>Please sign in</h1>
+                <Form.Group controlId='formCredential' className='mb-3 fs-5'>
+                    <Form.Label className='label'>Email or Username</Form.Label>
+                    <Form.Control
+                        type='text'
+                        value={credential}
+                        name='credential'
+                        placeholder='Email or Username'
+                        onChange={credentialChangeHandler}
+                    />
+                </Form.Group>
+                <Form.Group controlId='formPassword' className='fs-5'>
+                    <Form.Label className='label'>Password</Form.Label>
+                    <Form.Control
+                        type='password'
+                        value={password}
+                        name='password'
+                        placeholder='Password'
+                        onChange={passwordChangeHandler}
+                    />
+                </Form.Group>
+                <Button className='w-100 mt-5' variant='primary' type='submit'>Submit</Button>
+            </Form>
+        </Container>
+    );
 }
 
 export default LoginFormPage;

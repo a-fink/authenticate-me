@@ -7,7 +7,7 @@ import { store } from './app/store';
 import { Provider } from 'react-redux';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { restoreCSRF, csrfFetch } from './app/csrf';
-import { logInUser, logOutUser } from './app/sessionSlice';
+import { logInUser, logOutUser, restoreUser } from './app/sessionSlice';
 
 // in DEVELOPMENT only -> used for testing everything is correctly connected
 if(process.env.NODE_ENV !== 'production'){
@@ -19,6 +19,7 @@ if(process.env.NODE_ENV !== 'production'){
   window.csrfFetch = csrfFetch;
   window.logInUser = logInUser;
   window.logOutUser = logOutUser;
+  window.restoreUser = restoreUser;
 }
 
 
