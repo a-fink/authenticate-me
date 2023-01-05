@@ -1,6 +1,6 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { logInUser, selectUser } from '../../app/sessionSlice';
+import { logInUser, selectUser, restoreUser } from '../../app/sessionSlice';
 import { Navigate } from 'react-router-dom';
 import Container from 'react-bootstrap/Container';
 import Form from 'react-bootstrap/Form';
@@ -8,8 +8,28 @@ import Button from 'react-bootstrap/Button';
 import './login-form-page.css';
 
 function LoginFormPage(){
-    // get the value of user currently stored in our redux store
+    // attempt to get the user from the store (if not logged in, or page has been refreshed it will be null)
     const user = useSelector(selectUser);
+
+    // set up the ability to dispatch actions
+    const dispatch = useDispatch();
+
+    // use the useEffect hook to have this run on first load of this component
+    // give useEffect dependency of dispatch to prevent react warnings
+    // if no user in store attempt to load the user from the cookies
+    useEffect(() => {
+        if(user === null){
+          // try to dispatch the restoreUser action, if an error occurs log it to the console
+          try{
+            // unwrap provided by Redux Toolkit & allows us to see fulfilled/rejected status, will throw error on rejected
+            dispatch(restoreUser()).unwrap();
+          }
+          catch(err){
+            console.error(err);
+          }
+        }
+      }, [dispatch, user]);
+
 
     // states specific to this component, user entered data, both start as empty string
     const [credential, setCredential] = useState('');
@@ -17,9 +37,6 @@ function LoginFormPage(){
 
     // state to hold status of login process - idle | pending
     const [logInStatus, setLogInStatus] = useState('idle');
-
-    // set up the ability to dispatch actions
-    const dispatch = useDispatch();
 
     // submission handler for the form, prevent default form behavior so we can control what happens
     // button will only be active if both fields have data, so only need to check for login status of idle (so we don't try again if already in progress)
