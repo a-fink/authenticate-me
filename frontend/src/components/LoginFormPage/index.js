@@ -22,16 +22,12 @@ function LoginFormPage(){
     const dispatch = useDispatch();
 
     // submission handler for the form, prevent default form behavior so we can control what happens
+    // button will only be active if both fields have data, so only need to check for login status of idle (so we don't try again if already in progress)
     const formSubmitHandler = async (event) => {
         event.preventDefault();
 
-        // if either of the fields are blank, alert the user that they cannot be blank
-        if(credential === '' || password === ''){
-            alert('Please ensure both fields are filled in before submitting.');
-        }
-
         // provided both have input, we only want to attempt a login if our current status is idle (don't want to try again when already running)
-        else if(logInStatus === 'idle'){
+        if(logInStatus === 'idle'){
             // construct the user object we will send to the async login thunk
             const userData = {};
             userData.credential = credential;
@@ -98,7 +94,8 @@ function LoginFormPage(){
                         onChange={passwordChangeHandler}
                     />
                 </Form.Group>
-                <Button className='w-100 mt-5' variant='primary' type='submit'>Submit</Button>
+                {/* render button as disabled if either field is empty */}
+                {(credential === '' || password === '') ? <Button className='w-100 mt-5' variant='primary' type='submit' disabled>Submit</Button> : <Button className='w-100 mt-5' variant='primary' type='submit'>Submit</Button>}
             </Form>
         </Container>
     );
