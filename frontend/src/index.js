@@ -8,7 +8,7 @@ import { store } from './app/store';
 import { Provider } from 'react-redux';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { restoreCSRF, csrfFetch } from './app/csrf';
-import { logInUser, logOutUser, restoreUser, addNewUser } from './app/sessionSlice';
+import { logInUser, logOutUser, restoreUser, addNewUser, logout } from './app/sessionSlice';
 
 // in DEVELOPMENT only -> used for testing everything is correctly connected
 if(process.env.NODE_ENV !== 'production'){
@@ -22,6 +22,7 @@ if(process.env.NODE_ENV !== 'production'){
   window.logOutUser = logOutUser;
   window.restoreUser = restoreUser;
   window.addNewUser = addNewUser;
+  window.logout = logout;
 }
 
 

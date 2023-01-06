@@ -65,6 +65,21 @@ export const addNewUser = createAsyncThunk('session/addUser', async userData => 
     return data.user;
 })
 
+// async thunk for logging out a user
+// will be used from the navigation bar button, error handling and loading status will be handled there
+export const logout = createAsyncThunk('session/logout', async (_, thunkAPI) => {
+    // need to use csrfFetch we built to make delete request with right csrf token - need to give it a url and an options object
+    // it will set headers for us so we can just give options the method
+    let options = {method: 'DELETE'};
+
+    // send the delete request to clear user from backend, parse the json response received, and return it (will be an object with a success message)
+    const response = await csrfFetch('/api/session', options);
+    const data = await response.json();
+    console.log('in logout method, response data is ', data);
+    // dispatch the normal logout action to clear user from store
+    thunkAPI.dispatch(logOutUser());
+    return data;
+});
 
 // create the slice with the initial state & then build reducers
 export const sessionSlice = createSlice({
@@ -73,7 +88,8 @@ export const sessionSlice = createSlice({
     reducers: {
         logOutUser: state => {state.user = null}
     },
-    // error handling / loading will be handled by the login & app components, so only listening for success action from async thunks here
+    // error handling / loading will be handled by the react components that use, so only listening for success action from async thunks here
+    // the logout thunk will not get an extra reducer because the component will call the regular logout action provided no error occurs
     extraReducers(builder){
         builder.addCase(logInUser.fulfilled, (state, action) => {
             // will have the logged in user in the action.payload, set that user on state
@@ -96,7 +112,7 @@ export const sessionSlice = createSlice({
             console.log(state);
             console.log(action);
             state.user = action.payload;
-        });
+        })
     }
 })
 
