@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import LoginFormPage from './components/LoginFormPage';
+import SignupFormPage from './components/SignupFormPage';
 import { store } from './app/store';
 import { Provider } from 'react-redux';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
@@ -33,6 +34,7 @@ root.render(
         <Routes>
           <Route path="/*" element={<App />} />
           <Route path='/login' element={<LoginFormPage />} />
+          <Route path='/signup' element={<SignupFormPage />} />
         </Routes>
       </BrowserRouter>
     </Provider>
