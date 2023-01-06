@@ -30,10 +30,11 @@ export const logInUser = createAsyncThunk('session/login', async userData => {
     console.log('in logInUser thunk');
     console.log(options);
 
-    // send the post request, parse the json response received, and return it (will be user object for user that was logged in)
+    // send the post request, parse the json response received, and return it
+    // (data will be an object with a user property that holds the object of user info for user that was logged in)
     const response = await csrfFetch('/api/session', options);
-    const user = await response.json();
-    return user;
+    const data = await response.json();
+    return data.user;
 })
 
 // async thunk for restoring a user that's already logged in
@@ -96,6 +97,7 @@ export const sessionSlice = createSlice({
             console.log(`login user extra reducer case hit`);
             console.log(state);
             console.log(action);
+            console.log('payload is ', action.payload);
             state.user = action.payload;
         })
         .addCase(restoreUser.fulfilled, (state, action) => {
