@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { logInUser, selectUser, restoreUser } from '../../app/sessionSlice';
-import { Navigate } from 'react-router-dom';
+import { Navigate, Link } from 'react-router-dom';
 import Container from 'react-bootstrap/Container';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
@@ -113,6 +113,7 @@ function LoginFormPage(){
                 </Form.Group>
                 {/* render button as disabled if either field is empty */}
                 {(credential === '' || password === '') ? <Button className='w-100 mt-5' variant='primary' type='submit' disabled>Submit</Button> : <Button className='w-100 mt-5' variant='primary' type='submit'>Submit</Button>}
+                <div className="fs-6 text-center mt-4">Don't have an account? <Link to={'/signup'}>Register</Link></div>
             </Form>
         </Container>
     );
