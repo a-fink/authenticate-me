@@ -1,7 +1,7 @@
 {
   "name": "authenticate-me",
   "version": "1.0.0",
-  "description": "## Note Please note, this project is a work in progress. The backend is fairly complete, the frontend is still under construction.",
+  "description": "Full-stack authentication project",
   "main": "index.js",
   "scripts": {
     "heroku-postbuild": "npm run build --prefix frontend",
