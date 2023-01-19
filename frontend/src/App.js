@@ -10,30 +10,26 @@ import Carousel from 'react-bootstrap/Carousel';
 function App() {
   // attempt to get the user from the store (if not logged in, or page has been refreshed it will be null)
   const user = useSelector(selectUser);
-  // console.log('loading app, user is ', user.user.username);
 
   // set up the ability to dispatch actions
   const dispatch = useDispatch();
 
-  // use the useEffect hook to have this run on first load of this component
-  // give useEffect dependency of dispatch to prevent react warnings
-  // if no user in store attempt to load the user from the cookies
+  // useEffect hook to run on first load of this component - if no user in store attempt to load the user from the cookies
   useEffect(() => {
     if(user === null){
-      // try to dispatch the restoreUser action, if an error occurs log it to the console
+      // try to dispatch the restoreUser action, if an error occurs do nothing
       try{
         // unwrap provided by Redux Toolkit & allows us to see fulfilled/rejected status, will throw error on rejected
         dispatch(restoreUser()).unwrap();
       }
       catch(err){
-        console.error(err);
+        // do nothing
       }
     }
   }, [dispatch, user]);
 
   // event handler for the logout choice in the dropdown menu
-  const handleLogoutClick = (event) => {
-    console.log('in event handler')
+  const handleLogoutClick = () => {
     dispatch(logout());
   }
 

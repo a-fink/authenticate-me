@@ -14,18 +14,16 @@ function LoginFormPage(){
     // set up the ability to dispatch actions
     const dispatch = useDispatch();
 
-    // use the useEffect hook to have this run on first load of this component
-    // give useEffect dependency of dispatch to prevent react warnings
-    // if no user in store attempt to load the user from the cookies
+    // useEffect hook to run on first load of this component - if no user in store attempt to load the user from the cookies
     useEffect(() => {
         if(user === null){
-          // try to dispatch the restoreUser action, if an error occurs log it to the console
+          // try to dispatch the restoreUser action, if an error occurs do nothing
           try{
             // unwrap provided by Redux Toolkit & allows us to see fulfilled/rejected status, will throw error on rejected
             dispatch(restoreUser()).unwrap();
           }
           catch(err){
-            console.error(err);
+            // do nothing
           }
         }
       }, [dispatch, user]);
@@ -50,22 +48,13 @@ function LoginFormPage(){
             userData.credential = credential;
             userData.password = password;
 
-            console.log(`before submitting, userData is `, userData);
-
             try{
-                // set status to pending
                 setLogInStatus('pending');
-                // dispatch login action
-                // unwrap provided by Redux Toolkit & allows us to see fulfilled/rejected status, will throw error on rejected
+                // unwrap provided by Redux Toolkit, allows us to see fulfilled/rejected status, will throw error on rejected
                 await dispatch(logInUser(userData)).unwrap();
-                // TEMP alert user that login succeeded
-                alert('login successful')
             }
             catch(err){
-                // alert the user that the login attempt failed
                 alert('Credentials unable to be verified, please try again');
-                // TEMP - while in dev log the error
-                console.error(err);
             }
             finally{
                 // in either case set state of fields back to default empty string & login status back to idle

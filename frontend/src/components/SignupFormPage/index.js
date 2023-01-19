@@ -14,18 +14,16 @@ function SignupFormPage(){
     // set up the ability to dispatch actions
     const dispatch = useDispatch();
 
-    // use the useEffect hook to have this run on first load of this component
-    // give useEffect dependency of dispatch to prevent react warnings
-    // if no user in store attempt to load the user from the cookies
+    // useEffect hook to run on first load of this component - if no user in store attempt to load the user from the cookies
     useEffect(() => {
         if(user === null){
-          // try to dispatch the restoreUser action, if an error occurs log it to the console
+          // try to dispatch the restoreUser action, if an error occurs do nothing
           try{
             // unwrap provided by Redux Toolkit & allows us to see fulfilled/rejected status, will throw error on rejected
             dispatch(restoreUser()).unwrap();
           }
           catch(err){
-            console.error(err);
+            // do nothing
           }
         }
       }, [dispatch, user]);
@@ -77,7 +75,7 @@ function SignupFormPage(){
     }
 
     // submission handler for the form, pevent default behavior so we can control what happens
-    // button will only be active if all fields have data and the data is valid, so only need to validate data & check for status to be idle (don't send request when one already going)
+    // button will only be active if all fields have data and the data is valid, so only need to check for status to be idle (don't send request when one already going)
     const formSubmitHandler = async (event) => {
         event.preventDefault();
 
@@ -89,23 +87,13 @@ function SignupFormPage(){
             userData.username = userName;
             userData.password = password;
 
-            console.log('before submitting to add user, user data is ', userData);
-
             try{
-                // set status to pending
                 setAddUserStatus('pending');
-                // dispatch add user action
                 // unwrap provided by Redux Toolkit & allows us to see fulfilled/rejected status, will throw error on rejected
                 await dispatch(addNewUser(userData)).unwrap();
-                // TEMP alert user that login succeeded
-                alert('user creation successful')
             }
             catch(err){
-                // TODO - split between failed for uniqueness and failed for other reason
-                // alert the user that something went wrong
                 alert('Something went wrong, please try again');
-                // TEMP - while in dev log the error
-                console.error(err.message);
             }
             finally{
                 // in either case set the state of all input fields back to default empty string & status back to idle
