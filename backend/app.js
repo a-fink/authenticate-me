@@ -72,7 +72,6 @@ app.use((err, _req, _res, next) => {
 // stack will send back the error stack trace if we're in dev or null if in production
 app.use((err, _req, res, _next) => {
   res.status(err.status || 500);
-  console.error(err);
   res.json({
     title: err.title || 'Server Error',
     message: err.message,

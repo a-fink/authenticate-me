@@ -7,7 +7,7 @@ const apiRouter = require('./api');
 // connect the apiRouter
 router.use('/api', apiRouter);
 
-// static routes - will serve static React build files when in PRODUCTION
+// static routes - will serve static React build files when in production
 if(process.env.NODE_ENV === 'production'){
 
     // import the path functionality to resolve file path
