@@ -1,6 +1,9 @@
 import Cookies from 'js-cookie';
 
-export async function csrfFetch(url, options={}){
+export async function csrfFetch(urlEndpoint, options={}){
+    // url for backend in production
+    const url = 'https://authenticate-me-backend.fly.dev';
+
     // set method property on options to the incomming method, or GET if none is specified
     options.method = options.method || 'GET';
     // set the headers property on options to the incomming headers, or to {} if not specified
@@ -13,7 +16,7 @@ export async function csrfFetch(url, options={}){
     }
 
     // call the window's fetch method with the url and the updated options object
-    const res = await window.fetch(url, options);
+    const res = await window.fetch(url + urlEndpoint, options);
 
     // if response code is 400 or above, throw an error with the response
     if(res.status >= 400) throw res;
