@@ -1,9 +1,6 @@
 import Cookies from 'js-cookie';
 
 export async function csrfFetch(urlEndpoint, options={}){
-    // url for backend in production
-    const url = 'https://authenticate-me-backend.fly.dev';
-
     // set method property on options to the incomming method, or GET if none is specified
     options.method = options.method || 'GET';
     // set the headers property on options to the incomming headers, or to {} if not specified
