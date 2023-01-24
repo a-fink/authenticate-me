@@ -9,10 +9,13 @@ const db = require('../db/models');
 db.sequelize
   .authenticate()
   .then(() => {
-    console.log('Database connection success! Sequelize is ready to use...');
+    //console.log('Database connection success! Sequelize is ready to use...');
 
-    // Start listening for connections
-    app.listen(port, () => console.log(`Listening on port ${port}...`));
+    // Start listening for connections w/console log in dev
+    // app.listen(port, () => console.log(`Listening on port ${port}...`));
+
+    // Start listening for connections, explicitly set up on IP address 0.0.0.0 for production on fly.io
+    app.listen(port, '0.0.0.0');
   })
   .catch((err) => {
     console.log('Database connection failure.');
