@@ -16,16 +16,16 @@ if(process.env.NODE_ENV === 'production'){
     // serve frontend's copied in build folder's index.htm file at the root route & send the XSRF-TOKEN
     router.get('/', (req, res) => {
         res.cookie('XSRF-TOKEN', req.csrfToken());
-        return res.sendFile(path.resolve(__dirname, '../build', 'index.html'));
+        return res.sendFile(path.resolve(__dirname, '../../frontend', 'build', 'index.html'));
     });
 
     // serve the static assets in the frontend's copied in build folder
-    router.use(express.static(path.resolve('../build')));
+    router.use(express.static(path.resolve("../frontend/build")));
 
     // serve frontend's copied in build folder's index.html file at all other routes that DON'T start with /api & send XSRF-TOKEN same way we did above for root route
     router.get('/^(?!\/?api).*/', (req, res) => {
         res.cookie('XSRF-TOKEN', req.csrfToken());
-        return res.sendFile(path.resolve(__dirname, '../build', 'index.html'));
+        return res.sendFile(path.resolve(__dirname, '../../frontend', 'build', 'index.html'));
     });
 }
 
