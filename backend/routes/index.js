@@ -19,14 +19,14 @@ if(process.env.NODE_ENV === 'production'){
         return res.sendFile(path.resolve(__dirname, '../../frontend', 'build', 'index.html'));
     });
 
-    // serve the static assets in the frontend's build folder
-    router.use(express.static(path.resolve("../frontend/build")));
-
     // serve frontend's index.html file at all other routes that DON'T start with /api & send XSRF-TOKEN same way we did above for root route
     router.get('/^(?!\/?api).*/', (req, res) => {
         res.cookie('XSRF-TOKEN', req.csrfToken());
         return res.sendFile(path.resolve(__dirname, '../../frontend', 'build', 'index.html'));
     });
+
+    // serve the static assets in the frontend's build folder
+    router.use(express.static(path.resolve("../frontend/build")));
 }
 
 // route to add XSRF-TOKEN cookie when in DEVELOPMENT (necessary because in development front/back are two separate servers)
