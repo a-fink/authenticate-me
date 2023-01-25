@@ -13,14 +13,14 @@ if(process.env.NODE_ENV === 'production'){
     // import the path functionality to resolve file path
     const path = require('path');
 
-    // serve frontend's index.htm file at the root route & send the XSRF-TOKEN
-    router.get('/', (req, res) => {
+    // serve frontend's index.html file at all other routes that DON'T start with /api & send XSRF-TOKEN same way we did above for root route
+    router.get('/^(?!\/?api).*/', (req, res) => {
         res.cookie('XSRF-TOKEN', req.csrfToken());
         return res.sendFile(path.resolve(__dirname, '../../frontend', 'build', 'index.html'));
     });
 
-    // serve frontend's index.html file at all other routes that DON'T start with /api & send XSRF-TOKEN same way we did above for root route
-    router.get('/^(?!\/?api).*/', (req, res) => {
+    // serve frontend's index.htm file at the root route & send the XSRF-TOKEN
+    router.get('/', (req, res) => {
         res.cookie('XSRF-TOKEN', req.csrfToken());
         return res.sendFile(path.resolve(__dirname, '../../frontend', 'build', 'index.html'));
     });
