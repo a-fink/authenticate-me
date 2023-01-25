@@ -8,11 +8,6 @@ import Button from 'react-bootstrap/Button';
 import './login-form-page.css';
 
 function LoginFormPage(){
-    // TESTING
-    console.log('environment is', process.env.NODE_ENV)
-    console.log('is environment production? ', process.env.NODE_ENV === 'production')
-
-
     // attempt to get the user from the store (if not logged in, or page has been refreshed it will be null)
     const user = useSelector(selectUser);
 
