@@ -103,6 +103,7 @@ function LoginFormPage(){
                 {/* render button as disabled if either field is empty */}
                 {(credential === '' || password === '') ? <Button className='w-100 mt-5' variant='primary' type='submit' disabled>Submit</Button> : <Button className='w-100 mt-5' variant='primary' type='submit'>Submit</Button>}
                 <div className="fs-6 text-center mt-4">Don't have an account? <Link to={'/signup'}>Register</Link></div>
+                <div>testing environment variable is production: {process.env.NODE_ENV === 'production'}</div>
             </Form>
         </Container>
     );
