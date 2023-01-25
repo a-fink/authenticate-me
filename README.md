@@ -7,7 +7,7 @@
 - Learn and implement PostgreSQL
 - Learn and implement Redux Toolkit
 - Gain a better understanding of the authentication pattern by building a mock authentication system
-- Cement my understanding of how various front-end/back-end technologies fit together and communicate with one another
+- Cement my understanding of how front-end/back-end technologies fit together and communicate
 - Gain experience deploying a full-stack application
 
 ## Features
@@ -24,9 +24,8 @@
     - This removes the JWT cookies from the user's cookies
 
 ## Technologies Used
-- **Backend:** Express, Sequelize, PostgreSQL, bcrypt, cookie-parser, cors, csurf, dotenv, jsonwebtoken
-- **Frontend:** React, React Router, Redux Toolkit, React Bootstrap, js-cookie, Ionicons
-- **Hosting:** Heroku
+- **Backend:** ![Express.js](https://img.shields.io/badge/express.js-%23404d59.svg?style=for-the-badge&logo=express&logoColor=%2361DAFB) ![Sequelize](https://img.shields.io/badge/Sequelize-52B0E7?style=for-the-badge&logo=Sequelize&logoColor=white) ![Postgres](https://img.shields.io/badge/PostgreSQL-316192?style=for-the-badge&logo=postgresql&logoColor=white)
+- **Frontend:** ![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB) ![React Router](https://img.shields.io/badge/React_Router-CA4245?style=for-the-badge&logo=react-router&logoColor=white) ![Redux](https://img.shields.io/badge/Redux-593D88?style=for-the-badge&logo=redux&logoColor=white) ![Bootstrap](https://img.shields.io/badge/Bootstrap-563D7C?style=for-the-badge&logo=bootstrap&logoColor=white)
 
 ## Planned future improvements
 - Add required and aria-required attributes to forms for better user experience and accessibility
