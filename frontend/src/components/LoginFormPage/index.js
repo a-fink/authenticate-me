@@ -8,6 +8,11 @@ import Button from 'react-bootstrap/Button';
 import './login-form-page.css';
 
 function LoginFormPage(){
+    // TESTING
+    console.log('environment is', process.env.NODE_ENV)
+    console.log('is environment production? ', process.env.NODE_ENV === 'production')
+
+
     // attempt to get the user from the store (if not logged in, or page has been refreshed it will be null)
     const user = useSelector(selectUser);
 
@@ -103,7 +108,6 @@ function LoginFormPage(){
                 {/* render button as disabled if either field is empty */}
                 {(credential === '' || password === '') ? <Button className='w-100 mt-5' variant='primary' type='submit' disabled>Submit</Button> : <Button className='w-100 mt-5' variant='primary' type='submit'>Submit</Button>}
                 <div className="fs-6 text-center mt-4">Don't have an account? <Link to={'/signup'}>Register</Link></div>
-                <div>testing environment variable is production: {process.env.NODE_ENV === 'production'}</div>
             </Form>
         </Container>
     );
