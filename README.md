@@ -12,12 +12,12 @@
 
 ## Features
 - Users can create a new account
-    - Frontend validation ensures the user's email, username, and password follow the required formats the database expects
-    - Backend validation ensures the user data received from the frontend matches the required formats before insertion into the database
+    - Front-end validation ensures the user's email, username, and password follow the required formats the database expects
+    - Back-end validation ensures the user data received from the front-end matches the required formats before insertion into the database
     - Passwords are hashed and salted using the bcrypt library and only every stored in their encrypted form
 - Users can log in to an existing account
     - Submitted passwords are hashed and salted using bcrypt and compared to the stored encrypted value
-- Successful login or signup will set a JSON web token (JWT) in the user's cookies
+- Successful log in or signup will set a JSON web token (JWT) in the user's cookies
     - This token encodes the user's id, username, and email
     - Presence or absence of this cookie/token is used to ensure only requests from logged in users can access protected endpoints
 - Users can log out
