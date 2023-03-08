@@ -44,9 +44,9 @@ function App() {
           <NavDropdown.Item onClick={handleLogoutClick}>Log Out</NavDropdown.Item>
         </NavDropdown>
       </Nav>
-      <Container id='homepage-container' className='d-grid h-75 w-75'>
-        <h1 className='my-5'>{`Welcome back ${user.username}`}</h1>
-        <Carousel className='w-75'>
+      <Container id='homepage-container' className='d-grid'>
+        <h1 className='my-5 col-10'>{`Welcome back ${user.username}`}</h1>
+        <Carousel className='col-10'>
           <Carousel.Item interval={3000}>
             <img
               className='d-block w-100'

@@ -108,9 +108,9 @@ function SignupFormPage(){
 
     // if a user exists (restored or created) redirect them to the home page, otherwise render the signup component
     return (user !== null) ? <Navigate to='/' /> : (
-        <Container id='signup-container' className='d-grid h-100'>
-            <Form className='w-50' onSubmit={formSubmitHandler}>
-                <h1 className='text-center mb-5'>Create an account:</h1>
+        <Container id='signup-container' className='d-grid h-100 my-3'>
+            <Form className='col-sm-8 col-lg-6' onSubmit={formSubmitHandler}>
+                <h1 className='text-center mb-4'>Create an account:</h1>
                 <Form.Group controlId='formEmail' className='mb-1 fs-5'>
                     <Form.Label className='label'>Email</Form.Label>
                     <Form.Control
@@ -121,7 +121,7 @@ function SignupFormPage(){
                         onChange={emailChangeHandler}
                     />
                 </Form.Group>
-                {emailError ? <div className="mb-2 fs-6 fw-light text-danger">Please enter a valid email</div> : <div className="mb-2 fs-6 fw-light invisible">Warning placeholder</div>}
+                {emailError ? <div className="mb-1 fs-6 fw-light text-danger">Please enter a valid email</div> : <div className="mb-1 fs-6 fw-light invisible">Warning placeholder</div>}
                 <Form.Group controlId='formUsername' className='mb-1 fs-5'>
                     <Form.Label className='label'>Username</Form.Label>
                     <Form.Control
@@ -132,7 +132,7 @@ function SignupFormPage(){
                         onChange={userNameChangeHandler}
                     />
                 </Form.Group>
-                {userNameError ? <div className="mb-2 fw-light text-danger">Username must contain at least 4 characters and cannot be an email</div> : <div className="mb-2 fs-6 fw-light invisible">Warning placeholder</div>}
+                {userNameError ? <div className="mb-1 fw-light text-danger">Username must contain at least 4 characters and cannot be an email</div> : <div className="mb-1 fs-6 fw-light invisible">Warning placeholder</div>}
                 <Form.Group controlId='formPassword' className='mb-1 fs-5'>
                     <Form.Label className='label'>Password</Form.Label>
                     <Form.Control
@@ -143,7 +143,7 @@ function SignupFormPage(){
                         onChange={passwordChangeHandler}
                     />
                 </Form.Group>
-                {passwordError ? <div className="mb-2 fw-light text-danger">Password must contain at least 6 characters</div> : <div className="mb-2 fs-6 fw-light invisible">Warning placeholder</div>}
+                {passwordError ? <div className="mb-1 fw-light text-danger">Password must contain at least 6 characters</div> : <div className="mb-1 fs-6 fw-light invisible">Warning placeholder</div>}
                 <Form.Group controlId='formConfirmPassword' className='mb-1 fs-5'>
                     <Form.Label className='label'>Confirm Password</Form.Label>
                     <Form.Control
@@ -154,10 +154,10 @@ function SignupFormPage(){
                         onChange={confirmPasswordChangeHandler}
                     />
                 </Form.Group>
-                {confirmPasswordError ? <div className="mb-2 fw-light text-danger">Passwords must match</div> : <div className="mb-2 fs-6 fw-light invisible">Warning placeholder</div>}
+                {confirmPasswordError ? <div className="mb-1 fw-light text-danger">Passwords must match</div> : <div className="mb-1 fs-6 fw-light invisible">Warning placeholder</div>}
                 {/* render button as disabled if any field is empty */}
-                {canSubmit ? <Button className='w-100 mt-4' variant='primary' type='submit'>Submit</Button> : <Button className='w-100 mt-4' variant='primary' type='submit' disabled>Submit</Button>}
-                <div className="fs-6 text-center mt-4">Already have an account? <Link to={'/login'}>Log In</Link></div>
+                {canSubmit ? <Button className='w-100 mt-2' variant='primary' type='submit'>Submit</Button> : <Button className='w-100 mt-3' variant='primary' type='submit' disabled>Submit</Button>}
+                <div className="fs-6 text-center mt-3">Already have an account? <Link to={'/login'}>Log In</Link></div>
             </Form>
         </Container>
     );

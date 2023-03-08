@@ -78,7 +78,7 @@ function LoginFormPage(){
     // if a user already exists redirect them to the home page otherwise render the login component
     return (user !== null) ? <Navigate to='/' /> : (
         <Container id='login-container' className='d-grid h-100'>
-            <Form className='w-50' onSubmit={formSubmitHandler}>
+            <Form className='col-sm-6 col-lg-4' onSubmit={formSubmitHandler}>
                 <h1 className='text-center mb-5'>Please sign in</h1>
                 <Form.Group controlId='formCredential' className='mb-3 fs-5'>
                     <Form.Label className='label'>Email or Username</Form.Label>
