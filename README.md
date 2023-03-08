@@ -28,10 +28,12 @@ https://user-images.githubusercontent.com/107282070/223629543-3c454aad-398c-405a
 - **Backend:** ![Node.js](https://img.shields.io/badge/Node.js-43853D?style=for-the-badge&logo=node.js&logoColor=white) ![Express.js](https://img.shields.io/badge/express.js-%23404d59.svg?style=for-the-badge&logo=express&logoColor=%2361DAFB) ![Sequelize](https://img.shields.io/badge/Sequelize-52B0E7?style=for-the-badge&logo=Sequelize&logoColor=white) ![Postgres](https://img.shields.io/badge/PostgreSQL-316192?style=for-the-badge&logo=postgresql&logoColor=white)
 - **Frontend:** ![JavaScript](https://img.shields.io/badge/JavaScript-323330?style=for-the-badge&logo=javascript&logoColor=F7DF1E) ![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB) ![React Router](https://img.shields.io/badge/React_Router-CA4245?style=for-the-badge&logo=react-router&logoColor=white) ![Redux](https://img.shields.io/badge/Redux-593D88?style=for-the-badge&logo=redux&logoColor=white) ![Bootstrap](https://img.shields.io/badge/Bootstrap-563D7C?style=for-the-badge&logo=bootstrap&logoColor=white)
 
-## Planned future improvements
-- ~~Troubleshoot routing between Express/React-Router/Heroku to solve not found on refresh bug~~ Fixed
+## Recently Completed Improvements
+- Troubleshoot routing between Express/React-Router/Heroku to solve not found on refresh bug
+- Additional styling for better mobile experience
+
+## Planned Future Improvements
 - Add required and aria-required attributes to forms for better user experience and accessibility
-- ~~Additional styling for better mobile experience~~ Fixed
 - Add additional features for logged in users
 
 ### Acknowledgements
