@@ -30,7 +30,7 @@
 ## Planned future improvements
 - ~~Troubleshoot routing between Express/React-Router/Heroku to solve not found on refresh bug~~ Fixed
 - Add required and aria-required attributes to forms for better user experience and accessibility
-- Additional styling for better mobile experience
+- ~~Additional styling for better mobile experience~~ Fixed
 - Add additional features for logged in users
 
 ### Acknowledgements
